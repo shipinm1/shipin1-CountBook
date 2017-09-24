@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     tools:context="com.first.shipin1_countbook.MainActivity">
 
-    <TextView
+    <ListView
+        android:id="@+id/counterList"
+        android:layout_width="368dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        ></ListView>
+
+
+    <Button
+        android:id="@+id/newCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/newCounter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
