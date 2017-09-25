@@ -43,4 +43,6 @@ public class MainActivity extends AppCompatActivity {
         //intent.putExtra(EXTRA_MESSAGE, );
         startActivity(intent);
     }
+    //ToDo: make item in listview clickable
+    //public void listClick
 }

@@ -18,7 +18,10 @@
         </activity>
         <activity android:name=".NewCounter"
         android:parentActivityName=".MainActivity">
-    </activity>
+        </activity>
+        <activity android:name=".DisplayCounter"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>
