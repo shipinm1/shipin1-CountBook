@@ -26,11 +26,15 @@ public class NewCounter extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_counter);
         //Intent intent = getIntent();
-        saveButton.setOnClickListener(new View.OnClickListener()){
-            public void onClick(View v){
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 setResult(RESULT_OK);
+                //ToDo finish save button
             }
-        }
+        });
+
+
     }
 
 
