@@ -1,20 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.first.shipin1_countbook.DisplayCounter">
+    tools:context="com.first.shipin1_countbook.DisplayCounter"
+    android:baselineAligned="false">
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
+        android:id="@+id/DecreaseButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Decrease"
+        android:onClick="countDecrease"
+        android:layout_marginEnd="27dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/ResetButton" />
+    <Button
+        android:id="@+id/IncreaseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Increase"
+        android:onClick="countIncrease"
+        android:layout_alignBaseline="@+id/DecreaseButton"
+        android:layout_alignBottom="@+id/DecreaseButton"
+        android:layout_toEndOf="@+id/ResetButton"
+        android:layout_marginStart="24dp" />
+    <Button
+        android:id="@+id/ResetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:onClick="countReset"
+        android:layout_below="@+id/IncreaseButton"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/CounterTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         />
-</LinearLayout>
+        android:layout_below="@+id/NameDisplay"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/Comment"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/counterComment"
+        android:layout_below="@+id/ResetButton"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/NameDisplay"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/counterName" />
+
+    <TextView
+        android:id="@+id/CountNumberDisplay"
+        android:textSize="100sp"
+        android:textStyle="bold"
+        android:textColor="#191970"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/DecreaseButton"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
