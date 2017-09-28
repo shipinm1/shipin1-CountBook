@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView,View view, int pos, long arg3){
                 Intent intent = new Intent(MainActivity.this, DisplayCounterAvtivity.class);
                 intent.putExtra("CounterName", counterList.getItemAtPosition(pos).toString());
+                //System.out.println(counterList.getItemAtPosition(pos));
+                System.out.println("********Counters initialvalue: " + Counters.get(pos).getInitValue());
+                System.out.println("********Counters comment: " + Counters.get(pos).getComment());
                     startActivity(intent);
             }
         });
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Counter>>(){}.getType();
             Counters = gson.fromJson(in,listType);
+            //System.out.println("In loadFromFile name: " + Counters.get(0).getName());
         }catch (FileNotFoundException e){
             Counters = new ArrayList<Counter>();
         }

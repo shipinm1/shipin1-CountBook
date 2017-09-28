@@ -31,6 +31,7 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
     public void countIncrease(View view){
         countvalue ++;
         showValue.setText(Integer.toString(countvalue));
+
     }
 
     public void countDecrease(View view){

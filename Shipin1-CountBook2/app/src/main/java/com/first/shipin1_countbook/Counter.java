@@ -14,10 +14,11 @@ public class  Counter {
     private int initValue;
     private String comment;
 
-    public Counter(String name, int initValue ){
+    public Counter(String name, int initValue, String comment ){
         this.name = name;
         this.date = new Date();
         this.initValue = initValue;
+        this.comment = comment;
     }
 
     public String getName() {

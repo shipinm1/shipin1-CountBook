@@ -54,7 +54,7 @@ public class NewCounterActivity extends AppCompatActivity {
                 String comment = counterComment.getText().toString();
                 int value = Integer.parseInt(counterInitialValue.getText().toString());
 
-                Counter counter = new Counter(name, value);
+                Counter counter = new Counter(name, value, comment);
                 Counters.add(counter);
                 saveInFile();
                 Toast.makeText(NewCounterActivity.this, "New Counter Saved", Toast.LENGTH_LONG).show();
@@ -76,6 +76,7 @@ public class NewCounterActivity extends AppCompatActivity {
             OutputStreamWriter writer = new OutputStreamWriter(fos);
             Gson gson = new Gson();
             gson.toJson(Counters,writer);
+            //System.out.println("In saveInFile " + gson.toJson(Counters));
             writer.flush();
             fos.close();
 
