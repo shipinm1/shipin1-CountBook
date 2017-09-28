@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.first.shipin1_countbook.DisplayCounter"
+    tools:context="com.first.shipin1_countbook.DisplayCounterAvtivity"
     android:baselineAligned="false">
 
     <Button

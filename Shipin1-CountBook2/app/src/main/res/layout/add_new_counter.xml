@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.first.shipin1_countbook.NewCounter">
+    tools:context="com.first.shipin1_countbook.NewCounterActivity">
 
     <TextView
         android:textColor="#000000"
@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:text="@string/counterComment"/>
     <EditText
+        android:id="@+id/counterComment"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scrollbars="horizontal"

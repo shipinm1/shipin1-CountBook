@@ -9,7 +9,7 @@ import android.widget.TextView;
  * Created by gsp on 2017/9/24.
  */
 
-public class DisplayCounter extends AppCompatActivity{
+public class DisplayCounterAvtivity extends AppCompatActivity{
     TextView showValue;
     int countvalue = 0;
     int countinitial = 12;
