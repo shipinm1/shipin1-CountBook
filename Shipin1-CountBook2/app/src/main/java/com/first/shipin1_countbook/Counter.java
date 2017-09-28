@@ -57,6 +57,6 @@ public class  Counter {
 
     @Override
     public String toString(){
-        return name + "Last modified on: " + date.toString();
+        return name + " Counter \nLast modified on: " + date.toString();
     }
 }

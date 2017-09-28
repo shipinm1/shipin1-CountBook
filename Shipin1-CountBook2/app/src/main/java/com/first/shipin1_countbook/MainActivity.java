@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,17 +29,9 @@ import static com.first.shipin1_countbook.Counter.Counters;
 
 public class MainActivity extends AppCompatActivity {
     public static final String filename = "dataStorage.sav";
-
-    //public static final String EXTRA_MESSAGE="com.first.shipin1_countbook.MESSAGE";
-    //private ArrayList<Counter> counters = new ArrayList<Counter>();
-    //private ArrayAdapter<Counter> adapter;
-    //private String[] counterlist = {"food", "water", "equitpment"};
-
     private ArrayList<Counter> counters = new ArrayList<Counter>();
     private ArrayAdapter<Counter> counterAdapter;
 
-
-    //below is hard coded array list
     private ArrayList<String> counterlist = new ArrayList<String>();
     private ListView counterList;
     private TextView totalCounterNumber;
@@ -48,20 +41,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //new NewCounterActivity().loadFromFile();
         loadFromFile();
-        Date date = new Date();
-        /*counterlist.add("food"+"\nModified on"+date);
-        counterlist.add("water"+"\nModified on"+date);
-        counterlist.add("gear"+"\nModified on"+date);
-        counterlist.add("gun"+"\nModified on"+date);
-        counterlist.add("sun"+"\nModified on"+date);*/
 
+        Button clearButton = (Button) findViewById(R.id.deleteAll);
         counterList = (ListView) findViewById(R.id.counterList);
-        ArrayAdapter adapter = new ArrayAdapter<Counter>(this, android.R.layout.simple_list_item_1, Counters);
+        final ArrayAdapter adapter = new ArrayAdapter<Counter>(this, android.R.layout.simple_list_item_1, Counters);
         counterList.setAdapter(adapter);
         totalCounterNumber = (TextView) findViewById(R.id.totalCounter);
         totalCounterNumber.setText("Total number of Counter: " + counterList.getAdapter().getCount());
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Counters.clear();
+                adapter.notifyDataSetChanged();
+                saveInFile();
+        }
+        });
 
         counterList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -76,14 +72,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void createCounter(View view){
         Intent intent = new Intent(this, NewCounterActivity.class);
-        //intent.putExtra(EXTRA_MESSAGE, );
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
-
     protected void onStart(){
         super.onStart();
         //new NewCounterActivity().loadFromFile();
         //counterAdapter = new ArrayAdapter<Counter>(this, android.R.layout.simple_list_item_1, counters);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == 1){
+            if (resultCode == RESULT_CANCELED){
+                loadFromFile();
+                counterList = (ListView) findViewById(R.id.counterList);
+                ArrayAdapter adapter = new ArrayAdapter<Counter>(this, android.R.layout.simple_list_item_1, Counters);
+                counterList.setAdapter(adapter);
+
+            }
+        }
+    }
+    public void loadFromFile(){
+        try{
+            FileInputStream fis = openFileInput(filename);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+            Type listType = new TypeToken<ArrayList<Counter>>(){}.getType();
+            Counters = gson.fromJson(in,listType);
+        }catch (FileNotFoundException e){
+            Counters = new ArrayList<Counter>();
+        }
     }
 
     public void saveInFile(){
@@ -99,18 +116,6 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException();
         }catch (IOException e){
             throw new RuntimeException();
-        }
-    }
-
-    public void loadFromFile(){
-        try{
-            FileInputStream fis = openFileInput(filename);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-            Type listType = new TypeToken<ArrayList<Counter>>(){}.getType();
-            Counters = gson.fromJson(in,listType);
-        }catch (FileNotFoundException e){
-            Counters = new ArrayList<Counter>();
         }
     }
 }

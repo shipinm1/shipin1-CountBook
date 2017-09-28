@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -48,6 +49,7 @@ public class NewCounterActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String name = counterNameText.getText().toString();
                 String comment = counterComment.getText().toString();
                 int value = Integer.parseInt(counterInitialValue.getText().toString());
@@ -55,10 +57,11 @@ public class NewCounterActivity extends AppCompatActivity {
                 Counter counter = new Counter(name, value);
                 Counters.add(counter);
                 saveInFile();
+                Toast.makeText(NewCounterActivity.this, "New Counter Saved", Toast.LENGTH_LONG).show();
+                Intent returnIntent = new Intent();
+                setResult(RESULT_CANCELED, returnIntent);
+                finish();
 
-
-                setResult(RESULT_OK);
-                //ToDo finish save button
             }
         });
 
@@ -80,18 +83,6 @@ public class NewCounterActivity extends AppCompatActivity {
             throw new RuntimeException();
         }catch (IOException e){
             throw new RuntimeException();
-        }
-    }
-
-    public void loadFromFile(){
-        try{
-            FileInputStream fis = openFileInput(filename);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-            Type listType = new TypeToken<ArrayList<Counter>>(){}.getType();
-            Counters = gson.fromJson(in,listType);
-        }catch (FileNotFoundException e){
-            Counters = new ArrayList<Counter>();
         }
     }
 }
