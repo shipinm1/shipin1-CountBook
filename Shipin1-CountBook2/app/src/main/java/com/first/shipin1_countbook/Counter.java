@@ -13,12 +13,22 @@ public class  Counter {
     private Date date;
     private int initValue;
     private String comment;
+    private int currentValue;
 
     public Counter(String name, int initValue, String comment ){
         this.name = name;
         this.date = new Date();
         this.initValue = initValue;
         this.comment = comment;
+        this.currentValue = initValue;
+    }
+
+    public int getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(int currentValue) {
+        this.currentValue = currentValue;
     }
 
     public String getName() {

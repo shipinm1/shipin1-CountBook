@@ -63,10 +63,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView,View view, int pos, long arg3){
                 Intent intent = new Intent(MainActivity.this, DisplayCounterAvtivity.class);
-                intent.putExtra("CounterName", counterList.getItemAtPosition(pos).toString());
-                //System.out.println(counterList.getItemAtPosition(pos));
-                System.out.println("********Counters initialvalue: " + Counters.get(pos).getInitValue());
-                System.out.println("********Counters comment: " + Counters.get(pos).getComment());
+                //intent.putExtra("CounterName", counterList.getItemAtPosition(pos).toString());
+                intent.putExtra("CounterName", Counters.get(pos).getName());
+                //intent.putExtra("CounterDate", counterList.getItemAtPosition(pos).toString());
+                intent.putExtra("CounterInitialValue", Counters.get(pos).getInitValue());
+                intent.putExtra("CounterCurrentValue", Counters.get(pos).getCurrentValue());
+                intent.putExtra("CounterComment", Counters.get(pos).getComment());
+
+                System.out.println("********Counter Current Value: " + Counters.get(pos).getCurrentValue());
+                System.out.println("********Counter Initial Value: " + Counters.get(pos).getInitValue());
                     startActivity(intent);
             }
         });

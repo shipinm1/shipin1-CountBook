@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class DisplayCounterAvtivity extends AppCompatActivity{
     TextView showValue;
-    int countvalue = 0;
+    int countvalue ;
     int countinitial = 12;
 
     @Override
@@ -21,10 +21,16 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
 
 
         Bundle bundle = getIntent().getExtras();
-        TextView txtview = (TextView) findViewById(R.id.CounterTextView);
-        txtview.setText(bundle.getString("CounterName"));
+        TextView counterName = (TextView) findViewById(R.id.CounterTextView);
+        counterName.setText(bundle.getString("CounterName"));
+
+        TextView counterComment = (TextView) findViewById(R.id.counterComment);
+        counterComment.setText(bundle.getString("CounterComment"));
 
         showValue = (TextView) findViewById(R.id.CountNumberDisplay);
+        countvalue = (bundle.getInt("CounterCurrentValue"));
+        showValue.setText(Integer.toString(countvalue));
+
 
 
     }
