@@ -12,14 +12,15 @@ import android.widget.TextView;
 public class DisplayCounterAvtivity extends AppCompatActivity{
     TextView showValue;
     int countvalue ;
-    int countinitial = 12;
+    int countinitial;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.counter_activity);
 
-
+        //ToDo set the countinitial to initial value, then press reset to set the currentvalue = initialvalue
+        //ToDo add "save" and "delete" button
         Bundle bundle = getIntent().getExtras();
         TextView counterName = (TextView) findViewById(R.id.CounterTextView);
         counterName.setText(bundle.getString("CounterName"));
