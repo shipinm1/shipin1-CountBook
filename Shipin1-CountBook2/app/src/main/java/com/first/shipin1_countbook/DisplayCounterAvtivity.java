@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,17 +26,21 @@ import static com.first.shipin1_countbook.MainActivity.filename;
  */
 
 public class DisplayCounterAvtivity extends AppCompatActivity{
-    TextView showValue;
-    int countvalue ;
-    int countinitial;
-    int position;
+    private TextView showValue;
+    private EditText editedComment;
+    private EditText editedName;
+    private int countvalue ;
+    private int countinitial;
+    private int position;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.counter_activity);
 
-        //ToDo add "save" and "delete" button
+
+        editedComment = (EditText) findViewById(R.id.counterComment);
+        editedName = (EditText) findViewById(R.id.CounterTextView);
         Button saveButton = (Button) findViewById(R.id.CounterSaveButton);
         Button deleteButton = (Button) findViewById(R.id.CounterDeleteButton);
         Bundle bundle = getIntent().getExtras();
@@ -56,22 +61,17 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                //Counters.get(position).setComment();
-                //Counters.get(position).setName();
+                String edComment = editedComment.getText().toString();
+                String edName = editedName.getText().toString();
+                Counters.get(position).setComment(edComment);
+                Counters.get(position).setName(edName);
                 Counters.get(position).setDate(new Date());
                 Counters.get(position).setCurrentValue(countvalue);
-                /*System.out.println("Save button output date: " + new Date());
-                System.out.println("Save button output number: " + countvalue);
-                System.out.println("Save button output date: " + Counters.get(position).getDate());
-                System.out.println("Save button output number: " + Counters.get(position).getCurrentValue());*/
                 saveInFile();
                 Toast.makeText(DisplayCounterAvtivity.this, "Change Saved", Toast.LENGTH_LONG).show();
                 Intent returnIntent = new Intent();
                 setResult(RESULT_OK, returnIntent);
                 finish();
-
-
-
             }
         });
 
@@ -84,9 +84,6 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
                 Intent returnIntent = new Intent();
                 setResult(RESULT_OK, returnIntent);
                 finish();
-
-
-
             }
         });
 
@@ -95,19 +92,16 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
     public void countIncrease(View view){
         countvalue ++;
         showValue.setText(Integer.toString(countvalue));
-        System.out.println(" " + countvalue);
     }
 
     public void countDecrease(View view){
         countvalue --;
         showValue.setText(Integer.toString(countvalue));
-        System.out.println(" " + countvalue);
     }
 
     public void countReset(View view){
         countvalue = countinitial;
         showValue.setText(Integer.toString(countvalue));
-        System.out.println(" " + countvalue);
     }
 
     public void saveInFile(){

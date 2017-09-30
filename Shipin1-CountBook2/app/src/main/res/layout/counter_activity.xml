@@ -39,7 +39,7 @@
         android:layout_below="@+id/IncreaseButton"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <EditText
         android:id="@+id/CounterTextView"
         android:textSize="30sp"
         android:textColor="#9932CC"
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/DecreaseButton"
         android:layout_centerHorizontal="true" />
-    <TextView
+    <EditText
         android:id="@+id/counterComment"
         android:textSize="15sp"
         android:layout_width="match_parent"

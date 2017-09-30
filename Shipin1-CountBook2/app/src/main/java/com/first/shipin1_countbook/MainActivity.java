@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView counterList;
     private TextView totalCounterNumber;
 
+//ToDo implement user input constraint
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("CounterCurrentValue", Counters.get(pos).getCurrentValue());
                 intent.putExtra("CounterComment", Counters.get(pos).getComment());
                 intent.putExtra("position", pos);
-                //System.out.println("********Counter Current Value: " + Counters.get(pos).getCurrentValue());
-                //System.out.println("********Counter Initial Value: " + Counters.get(pos).getInitValue());
                 startActivityForResult(intent,1);
             }
         });
@@ -102,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
             Gson gson = new Gson();
             Type listType = new TypeToken<ArrayList<Counter>>(){}.getType();
             Counters = gson.fromJson(in,listType);
-            //System.out.println("In loadFromFile name: " + Counters.get(0).getName());
         }catch (FileNotFoundException e){
             Counters = new ArrayList<Counter>();
         }
