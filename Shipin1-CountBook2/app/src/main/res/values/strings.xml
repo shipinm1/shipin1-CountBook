@@ -8,4 +8,5 @@
     <string name="valueName">Initial Value:</string>
     <string name="counterComment">Comment:</string>
     <string name="commentHint">Please enter the detail of the counter here</string>
+    <string name="counterDelete">Delete</string>
 </resources>

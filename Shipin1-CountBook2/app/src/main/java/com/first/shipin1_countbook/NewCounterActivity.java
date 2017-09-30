@@ -59,7 +59,7 @@ public class NewCounterActivity extends AppCompatActivity {
                 saveInFile();
                 Toast.makeText(NewCounterActivity.this, "New Counter Saved", Toast.LENGTH_LONG).show();
                 Intent returnIntent = new Intent();
-                setResult(RESULT_CANCELED, returnIntent);
+                setResult(RESULT_OK, returnIntent);
                 finish();
 
             }

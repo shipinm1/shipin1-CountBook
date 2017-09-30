@@ -29,10 +29,6 @@ import static com.first.shipin1_countbook.Counter.Counters;
 
 public class MainActivity extends AppCompatActivity {
     public static final String filename = "dataStorage.sav";
-    private ArrayList<Counter> counters = new ArrayList<Counter>();
-    private ArrayAdapter<Counter> counterAdapter;
-
-    private ArrayList<String> counterlist = new ArrayList<String>();
     private ListView counterList;
     private TextView totalCounterNumber;
 
@@ -54,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Counters.clear();
-                adapter.notifyDataSetChanged();
                 saveInFile();
                 totalCounterNumber.setText("Total number of Counter: " + counterList.getAdapter().getCount());
                 adapter.notifyDataSetChanged();
@@ -65,16 +60,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView,View view, int pos, long arg3){
                 Intent intent = new Intent(MainActivity.this, DisplayCounterAvtivity.class);
-                //intent.putExtra("CounterName", counterList.getItemAtPosition(pos).toString());
                 intent.putExtra("CounterName", Counters.get(pos).getName());
-                //intent.putExtra("CounterDate", counterList.getItemAtPosition(pos).toString());
+                intent.putExtra("CounterDate", Counters.get(pos).getDate());
                 intent.putExtra("CounterInitialValue", Counters.get(pos).getInitValue());
                 intent.putExtra("CounterCurrentValue", Counters.get(pos).getCurrentValue());
                 intent.putExtra("CounterComment", Counters.get(pos).getComment());
-
-                System.out.println("********Counter Current Value: " + Counters.get(pos).getCurrentValue());
-                System.out.println("********Counter Initial Value: " + Counters.get(pos).getInitValue());
-                    startActivity(intent);
+                intent.putExtra("position", pos);
+                //System.out.println("********Counter Current Value: " + Counters.get(pos).getCurrentValue());
+                //System.out.println("********Counter Initial Value: " + Counters.get(pos).getInitValue());
+                startActivityForResult(intent,1);
             }
         });
 
@@ -86,17 +80,17 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onStart(){
         super.onStart();
-        //new NewCounterActivity().loadFromFile();
-        //counterAdapter = new ArrayAdapter<Counter>(this, android.R.layout.simple_list_item_1, counters);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == 1){
-            if (resultCode == RESULT_CANCELED){
+            if (resultCode == RESULT_OK){
                 loadFromFile();
                 counterList = (ListView) findViewById(R.id.counterList);
                 ArrayAdapter adapter = new ArrayAdapter<Counter>(this, android.R.layout.simple_list_item_1, Counters);
                 counterList.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 totalCounterNumber.setText("Total number of Counter: " + counterList.getAdapter().getCount());
             }
         }
