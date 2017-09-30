@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 Counters.clear();
                 adapter.notifyDataSetChanged();
                 saveInFile();
+                totalCounterNumber.setText("Total number of Counter: " + counterList.getAdapter().getCount());
+                adapter.notifyDataSetChanged();
         }
         });
 
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 counterList = (ListView) findViewById(R.id.counterList);
                 ArrayAdapter adapter = new ArrayAdapter<Counter>(this, android.R.layout.simple_list_item_1, Counters);
                 counterList.setAdapter(adapter);
-
+                totalCounterNumber.setText("Total number of Counter: " + counterList.getAdapter().getCount());
             }
         }
     }

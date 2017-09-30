@@ -31,6 +31,7 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
         showValue = (TextView) findViewById(R.id.CountNumberDisplay);
         countvalue = (bundle.getInt("CounterCurrentValue"));
         showValue.setText(Integer.toString(countvalue));
+        countinitial = (bundle.getInt("CounterInitialValue"));
 
 
 
