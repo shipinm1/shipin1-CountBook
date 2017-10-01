@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,21 +58,29 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
         countinitial = (bundle.getInt("CounterInitialValue"));
 
 
-
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
                 String edComment = editedComment.getText().toString();
                 String edName = editedName.getText().toString();
-                Counters.get(position).setComment(edComment);
-                Counters.get(position).setName(edName);
-                Counters.get(position).setDate(new Date());
-                Counters.get(position).setCurrentValue(countvalue);
-                saveInFile();
-                Toast.makeText(DisplayCounterAvtivity.this, "Change Saved", Toast.LENGTH_LONG).show();
-                Intent returnIntent = new Intent();
-                setResult(RESULT_OK, returnIntent);
-                finish();
+                if (countvalue < 0){
+                    Toast.makeText(DisplayCounterAvtivity.this, "Counter Can Not Be Negative\n Change Unsaved", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+                if (edName.matches("")){
+                    Toast.makeText(DisplayCounterAvtivity.this, "Name Can Not Be Empty\n Change Unsaved", Toast.LENGTH_LONG).show();
+                    finish();
+                }else {
+                    Counters.get(position).setComment(edComment);
+                    Counters.get(position).setName(edName);
+                    Counters.get(position).setDate(new Date());
+                    Counters.get(position).setCurrentValue(countvalue);
+                    saveInFile();
+                    Toast.makeText(DisplayCounterAvtivity.this, "Change Saved", Toast.LENGTH_LONG).show();
+                    Intent returnIntent = new Intent();
+                    setResult(RESULT_OK, returnIntent);
+                    finish();
+                }
             }
         });
 

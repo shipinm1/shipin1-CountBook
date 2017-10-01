@@ -3,7 +3,7 @@
     <string name="newCounter">New</string>
     <string name="save">Save</string>
     <string name="nameHint">Please enter the name of the counter</string>
-    <string name="initialHint">Please enter the initial value of the counter</string>
+    <string name="initialHint">Enter initial value/Default 0</string>
     <string name="counterName">Counter Name:</string>
     <string name="valueName">Initial Value:</string>
     <string name="counterComment">Comment:</string>

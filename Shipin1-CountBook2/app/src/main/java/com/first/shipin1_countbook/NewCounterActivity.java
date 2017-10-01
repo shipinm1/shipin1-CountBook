@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,23 +50,24 @@ public class NewCounterActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String name = counterNameText.getText().toString();
-                String comment = counterComment.getText().toString();
-                int value = Integer.parseInt(counterInitialValue.getText().toString());
-
-                Counter counter = new Counter(name, value, comment);
-                Counters.add(counter);
-                saveInFile();
-                Toast.makeText(NewCounterActivity.this, "New Counter Saved", Toast.LENGTH_LONG).show();
-                Intent returnIntent = new Intent();
-                setResult(RESULT_OK, returnIntent);
-                finish();
-
+                if (name.matches("")) {
+                    Toast.makeText(NewCounterActivity.this, "Name Can Not Be Empty\nCreation Failed", Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    String comment = counterComment.getText().toString();
+                    counterInitialValue.setText("0");
+                    int value = Integer.parseInt(counterInitialValue.getText().toString());
+                    Counter counter = new Counter(name, value, comment);
+                    Counters.add(counter);
+                    saveInFile();
+                    Toast.makeText(NewCounterActivity.this, "New Counter Saved", Toast.LENGTH_LONG).show();
+                    Intent returnIntent = new Intent();
+                    setResult(RESULT_OK, returnIntent);
+                    finish();
+                }
             }
         });
-
-
     }
 
 
@@ -76,7 +78,6 @@ public class NewCounterActivity extends AppCompatActivity {
             OutputStreamWriter writer = new OutputStreamWriter(fos);
             Gson gson = new Gson();
             gson.toJson(Counters,writer);
-            //System.out.println("In saveInFile " + gson.toJson(Counters));
             writer.flush();
             fos.close();
 

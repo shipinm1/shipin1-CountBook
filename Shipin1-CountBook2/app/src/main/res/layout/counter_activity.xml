@@ -40,6 +40,7 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
+
         android:id="@+id/CounterTextView"
         android:textSize="30sp"
         android:textColor="#9932CC"
