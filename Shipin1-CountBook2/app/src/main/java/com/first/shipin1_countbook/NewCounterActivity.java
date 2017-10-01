@@ -56,7 +56,10 @@ public class NewCounterActivity extends AppCompatActivity {
                     finish();
                 } else {
                     String comment = counterComment.getText().toString();
-                    counterInitialValue.setText("0");
+                    String initvalue = counterInitialValue.getText().toString();
+                    if (initvalue.matches("")) {
+                        counterInitialValue.setText("0");
+                    }
                     int value = Integer.parseInt(counterInitialValue.getText().toString());
                     Counter counter = new Counter(name, value, comment);
                     Counters.add(counter);

@@ -30,40 +30,55 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
     private TextView showValue;
     private EditText editedComment;
     private EditText editedName;
+    private EditText editedInitialValue;
     private int countvalue ;
     private int countinitial;
     private int position;
+    private int temp;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.counter_activity);
 
-
+        editedInitialValue = (EditText) findViewById(R.id.InitialValueView);
         editedComment = (EditText) findViewById(R.id.counterComment);
         editedName = (EditText) findViewById(R.id.CounterTextView);
+
         Button saveButton = (Button) findViewById(R.id.CounterSaveButton);
         Button deleteButton = (Button) findViewById(R.id.CounterDeleteButton);
         Bundle bundle = getIntent().getExtras();
+
         TextView counterName = (TextView) findViewById(R.id.CounterTextView);
         counterName.setText(bundle.getString("CounterName"));
-
         TextView counterComment = (TextView) findViewById(R.id.counterComment);
         counterComment.setText(bundle.getString("CounterComment"));
 
-        position = (bundle.getInt("position"));
         showValue = (TextView) findViewById(R.id.CountNumberDisplay);
+        position = (bundle.getInt("position"));
         countvalue = (bundle.getInt("CounterCurrentValue"));
-        showValue.setText(Integer.toString(countvalue));
         countinitial = (bundle.getInt("CounterInitialValue"));
+        temp = countvalue;
+        editedInitialValue.setText(Integer.toString(countinitial));
+        showValue.setText(Integer.toString(countvalue));
 
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
+                String initvalue = editedInitialValue.getText().toString();
+                if (initvalue.matches("")) {
+                    editedInitialValue.setText("0");
+                }
+                int edInitialValue = Integer.parseInt(editedInitialValue.getText().toString());
                 String edComment = editedComment.getText().toString();
                 String edName = editedName.getText().toString();
+                if (edInitialValue < 0){
+                    Toast.makeText(DisplayCounterAvtivity.this, "Initial Value Can Not Be Negative\n Change Unsaved", Toast.LENGTH_LONG).show();
+                    finish();
+                }
                 if (countvalue < 0){
+                    countvalue = temp;
                     Toast.makeText(DisplayCounterAvtivity.this, "Counter Can Not Be Negative\n Change Unsaved", Toast.LENGTH_LONG).show();
                     finish();
                 }
@@ -71,6 +86,7 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
                     Toast.makeText(DisplayCounterAvtivity.this, "Name Can Not Be Empty\n Change Unsaved", Toast.LENGTH_LONG).show();
                     finish();
                 }else {
+                    Counters.get(position).setInitValue(edInitialValue);
                     Counters.get(position).setComment(edComment);
                     Counters.get(position).setName(edName);
                     Counters.get(position).setDate(new Date());
