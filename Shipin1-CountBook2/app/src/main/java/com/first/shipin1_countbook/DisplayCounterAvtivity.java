@@ -23,24 +23,32 @@ import static com.first.shipin1_countbook.Counter.Counters;
 import static com.first.shipin1_countbook.MainActivity.filename;
 
 /**
- * Created by gsp on 2017/9/24.
+ * Created by shipin1 on 2017/9/24.
+ *
+ * Version 1.0
+ *
+ * DisplayCounterActivity Class Description:
+ * Handling the functionality of the "Detailed" page of each counter.
+ * Used to modify/save/delete the existing counter.
+ * class activate when counter was clicked on the main page.
+ * information passed by using "intnet,putExtra()"
  */
 
 public class DisplayCounterAvtivity extends AppCompatActivity{
-    private TextView showValue;
-    private EditText editedComment;
-    private EditText editedName;
-    private EditText editedInitialValue;
-    private int countvalue ;
-    private int countinitial;
-    private int position;
-    private int temp;
+    private TextView showValue;                     //TextView for showing the counter value
+    private EditText editedComment;                 //User input comment
+    private EditText editedName;                    //User input counter name
+    private EditText editedInitialValue;            //User input initial value
+    private int countvalue ;                        //count value holder
+    private int countinitial;                       //count initial holder
+    private int position;                           //counter position in arraylist
+    private int temp;                               //temp for storing the temp current value
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.counter_activity);
-
+        // preparation for data receiving and displaying
         editedInitialValue = (EditText) findViewById(R.id.InitialValueView);
         editedComment = (EditText) findViewById(R.id.counterComment);
         editedName = (EditText) findViewById(R.id.CounterTextView);
@@ -62,7 +70,7 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
         editedInitialValue.setText(Integer.toString(countinitial));
         showValue.setText(Integer.toString(countvalue));
 
-
+        //Save button action when clicked. If statements for error checking.
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -99,7 +107,7 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
                 }
             }
         });
-
+        //delete button actions.
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -114,6 +122,7 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
 
 
     }
+    //count up, count down and reset.
     public void countIncrease(View view){
         countvalue ++;
         showValue.setText(Integer.toString(countvalue));
@@ -128,7 +137,7 @@ public class DisplayCounterAvtivity extends AppCompatActivity{
         countvalue = countinitial;
         showValue.setText(Integer.toString(countvalue));
     }
-
+    //save file action using Gson serialization
     public void saveInFile(){
         try{
             FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);

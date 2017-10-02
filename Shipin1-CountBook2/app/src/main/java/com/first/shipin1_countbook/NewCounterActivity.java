@@ -28,25 +28,34 @@ import java.util.Date;
 import static com.first.shipin1_countbook.Counter.Counters;
 
 /**
- * Created by gsp on 2017/9/24.
+ * Created by shipin1 on 2017/9/24.
+ *
+ * Version 1.0
+ *
+ * NewCounterActivity Class Description:
+ * functionality of creating new counters.
+ * Asking user input data such as:
+ * counter name, counter initial value, counter comments.
+ * Set the current value of counter equal to initial value by default
+ * Auto generate date when creation was completed.
  */
 
 public class NewCounterActivity extends AppCompatActivity {
-    public static String filename = "dataStorage.sav";
-
-    private EditText counterNameText;
-    private EditText counterInitialValue;
-    private EditText counterComment;
+    public static String filename = "dataStorage.sav";      //file name
+    private EditText counterNameText;                       //counter name
+    private EditText counterInitialValue;                   //initial value
+    private EditText counterComment;                        //counter comment.
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_counter);
-
+        //initialization, preparation
         Button saveButton = (Button) findViewById(R.id.savebutton);
         counterNameText = (EditText) findViewById(R.id.counterName);
         counterInitialValue = (EditText) findViewById(R.id.initialValue);
         counterComment = (EditText) findViewById(R.id.counterComment);
 
+        // save button activity, if statements for error checking
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,8 +82,7 @@ public class NewCounterActivity extends AppCompatActivity {
         });
     }
 
-
-
+    //save file action by using Gson
     public void saveInFile(){
         try{
             FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);

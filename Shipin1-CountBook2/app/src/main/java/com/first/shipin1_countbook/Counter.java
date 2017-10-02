@@ -4,17 +4,25 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by gsp on 2017/9/24.
+ * Created by shipin1 on 2017/9/24.
+ *
+ * Version 1.0
+ *
+ * Counter Class Description:
+ * Making the Arraylist object "Counters".
+ * Used to store counter related information such as name, comment, values and dates.
+ * The class was used by "MainActivity" class.
  */
 
 public class  Counter {
     public static ArrayList<Counter> Counters = new ArrayList<Counter>();
-    private String name;
-    private Date date;
-    private int initValue;
-    private String comment;
-    private int currentValue;
+    private String name;                    //name of counter
+    private Date date;                      //date when modification applied
+    private int initValue;                  //the initial value of the counter
+    private String comment;                 //user input comments. It is ok to be empty
+    private int currentValue;               //counter current value
 
+    /*Construction and getter and setter*/
     public Counter(String name, int initValue, String comment ){
         this.name = name;
         this.date = new Date();
@@ -65,7 +73,7 @@ public class  Counter {
 
 
 
-
+    //Used to display information on the main activity page.
     @Override
     public String toString(){
         return "Counter --- " + name + "\nLast modified on:  \n" + date.toString() + "\nCurrent Value: " + currentValue;

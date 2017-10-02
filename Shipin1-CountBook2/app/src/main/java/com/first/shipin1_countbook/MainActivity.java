@@ -27,19 +27,31 @@ import java.util.Date;
 
 import static com.first.shipin1_countbook.Counter.Counters;
 
-public class MainActivity extends AppCompatActivity {
-    public static final String filename = "dataStorage.sav";
-    private ListView counterList;
-    private TextView totalCounterNumber;
+/**
+ * Created by shipin1 on 2017/9/24.
+ *
+ * Version 1.0
+ *
+ * MainActivity Class Description:
+ * App start up page
+ * Display listView of Counters
+ * Call other class such as DisplayCounterActivity and NewCounterActivity
+ * information passed by using "intnet,putExtra()"
+ */
 
-//ToDo implement user input constraint
+public class MainActivity extends AppCompatActivity {
+    public static final String filename = "dataStorage.sav";        //file name for storing data
+    private ListView counterList;                                   //display counter list
+    private TextView totalCounterNumber;                            //total counter number
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadFromFile();
 
+        //Initialization, loading from file, preparation.
+        loadFromFile();
         Button clearButton = (Button) findViewById(R.id.deleteAll);
         counterList = (ListView) findViewById(R.id.counterList);
         final ArrayAdapter adapter = new ArrayAdapter<Counter>(this, android.R.layout.simple_list_item_1, Counters);
@@ -47,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         totalCounterNumber = (TextView) findViewById(R.id.totalCounter);
         totalCounterNumber.setText("Total number of Counter: " + counterList.getAdapter().getCount());
 
+        //"Delete All" button action
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -57,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         }
         });
 
+        //viewList click action. passing value call the other activity.
         counterList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView,View view, int pos, long arg3){
@@ -79,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onStart(){
         super.onStart();
-
     }
 
+    //Main page refreshing purpose
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == 1){
             if (resultCode == RESULT_OK){
@@ -94,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    //loading file action using Gson
     public void loadFromFile(){
         try{
             FileInputStream fis = openFileInput(filename);
@@ -106,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //saving file action using Gson
     public void saveInFile(){
         try{
             FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
